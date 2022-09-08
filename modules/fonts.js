@@ -36,11 +36,17 @@ define([
 
             let fontFamily = this.configurationService.getValue("customizeUI.font.regular");
             if (typeof (fontFamily) == "string" && fontFamily.length > 0) {
+                if (fontFamily.indexOf(",") == -1) {
+                    fontFamily = `"${fontFamily}"`
+                }
                 this.setFontFamily(fontFamily);
             }
 
             let monospaceFamily = this.configurationService.getValue("customizeUI.font.monospace");
             if (typeof (monospaceFamily) == "string" && monospaceFamily.length > 0) {
+                if (monospaceFamily.indexOf(",") == -1) {
+                    monospaceFamily = `"${monospaceFamily}"`
+                }
                 this.setMonospaceFontFamily(monospaceFamily);
             }
         }
@@ -56,11 +62,11 @@ define([
         }
 
         setFontFamily(fontFamily) {
-            addStyle(`.mac, .windows, .linux { font-family: "${fontFamily}" !important; }`);
+            addStyle(`.mac, .windows, .linux { font-family: ${fontFamily} !important; }`);
         }
 
         setMonospaceFontFamily(fontFamily) {
-            addStyle(`.mac, .windows, .linux { --monaco-monospace-font:"${fontFamily}" !important; }`);
+            addStyle(`.mac, .windows, .linux { --monaco-monospace-font: ${fontFamily} !important; }`);
         }
 
         updateFontSize(fontSizeMap) {
